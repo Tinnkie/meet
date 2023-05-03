@@ -9,6 +9,9 @@
 ### The goal of this project is to build a web application that combines the benefits of serverless architecture and PWAs. By using serverless functions, the app requires no backend maintenance, is easy to scale, always available, and has no cost for idle time. The PWA features allow for instant loading, offline support, push notifications, "add to home screen" prompt, responsive design, and cross-platform compatibility. To ensure high-quality code, the app is built using a TDD approach where tests are written before writing the actual functionality for the app. Additionally, the app incorporates data visualization techniques to display event data in an understandable and engaging format.
 
 <br>
+<img src=https://i.ibb.co/SxHTw7w/MEET-App.png>
+
+<br>
 <br>
 
 # Features & User Stories
