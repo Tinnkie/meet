@@ -10,6 +10,7 @@ class CitySearch extends Component {
         <input
             type="text"
             className="city"
+            value={this.state.query}
         />
         <ul className="suggestions">
         </ul>
