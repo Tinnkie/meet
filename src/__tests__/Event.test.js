@@ -36,5 +36,33 @@ describe('<Event /> component', () => {
         expect(EventWrapper.state('collapsed')).toBe(true);
     });
 
+    test('the collapsed view is rendered correctly', () => {
+        expect(EventWrapper.find('h3.about')).toHaveLength(0);
+        expect(EventWrapper.find('a.link')).toHaveLength(0);
+        expect(EventWrapper.find('p.description')).toHaveLength(0);
+    });
+
+    test('user can expand an event when clicking show details button', () => {
+        const detailsButton = EventWrapper.find('button.details-btn');
+        expect(detailsButton.text()).toBe('show details');
+        detailsButton.simulate('click');
+        expect(EventWrapper.state('collapsed')).toBe(false);
+    })
+
+    test('event details is expanded and rendered correctly', () => {
+        expect(EventWrapper.find('h3.about')).toHaveLength(1);
+        expect(EventWrapper.find('a.link')).toHaveLength(1);
+        expect(EventWrapper.find('p.description')).toHaveLength(1);
+    });
+
+    test('user can collapse an event when clicking hide details button', () => {
+        const detailsButton = EventWrapper.find('button.details-btn');
+        expect(detailsButton.text()).toBe('hide details');
+        detailsButton.simulate('click');
+        expect(EventWrapper.state('collapsed')).toBe(true);
+    })
+
+
+
 
 });

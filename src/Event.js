@@ -7,9 +7,10 @@ class Event extends Component {
             collapsed: !prevState.collapsed,
         }));
     };
-    
+
   render() {
     const { event } = this.props;
+    const { collapsed } = this.state;
     return (
         <div className='event'>
         <h2 className='summary'>{event.summary}</h2>
