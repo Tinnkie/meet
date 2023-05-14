@@ -14,5 +14,11 @@ describe('<Event /> component', () => {
         expect(EventWrapper).toBeDefined();
       });
 
+    test('summary is rendered correctly in a h2 tag', () => {
+        const summary = EventWrapper.find('h2.summary');
+        expect(summary).toHaveLength(1);
+        expect(summary.text()).toBe(event.summary);
+    });
+
 
 });
