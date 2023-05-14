@@ -32,5 +32,9 @@ describe('<Event /> component', () => {
         expect(eventLocation.text()).toBe(`@${event.summary} | ${event.location}`);
     });
 
+    test('renders collapsed by default', () => {
+        expect(EventWrapper.state('collapsed')).toBe(true);
+    });
+
 
 });

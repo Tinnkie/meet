@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 
 class Event extends Component {
+    state = { collapsed: true };
+    toggleDetails = () => {
+        this.setState((prevState) => ({
+            collapsed: !prevState.collapsed,
+        }));
+    };
+    
   render() {
     const { event } = this.props;
     return (
@@ -12,6 +19,20 @@ class Event extends Component {
         <p className="event-location">
             {`@${event.summary} | ${event.location}`}
         </p>
+        {!collapsed && (
+        <>
+            <div className="details">
+            <h3 className="about">About event:</h3>
+            <a className="link" href={event.htmlLink}>
+                See details on Google Calendar
+            </a>
+            <p className="description">{event.description}</p>
+            </div>
+        </>
+    )}
+    <button className="details-btn" onClick={() => this.toggleDetails()}>
+        {collapsed ? "show" : "hide"} details
+    </button>
 
         </div>
     
