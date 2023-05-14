@@ -26,5 +26,11 @@ describe('<Event /> component', () => {
         expect(eventStart.text()).toBe(new Date(event.start.dateTime).toString());
     });
 
+    test('event location is rendered correctly', () => {
+        const eventLocation = EventWrapper.find('p.event-location');
+        expect(eventLocation).toHaveLength(1);
+        expect(eventLocation.text()).toBe(`@${event.summary} | ${event.location}`);
+    });
+
 
 });

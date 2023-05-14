@@ -9,6 +9,9 @@ class Event extends Component {
         <p className="event-start">
             {new Date(event.start.dateTime).toString()}
         </p>
+        <p className="event-location">
+            {`@${event.summary} | ${event.location}`}
+        </p>
 
         </div>
     
