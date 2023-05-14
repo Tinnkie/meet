@@ -1,4 +1,5 @@
 import { mockData } from './mock-data';
+import axios from 'axios';
 /**
  *
  * @param {*} events:
@@ -14,4 +15,8 @@ export const extractLocations = (events) => {
 
 export const getEvents = async () => {
     return mockData;
+  };
+
+export const getAccessToken = async () => {
+
   };
