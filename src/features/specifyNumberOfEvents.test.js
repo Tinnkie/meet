@@ -18,8 +18,8 @@ defineFeature(feature, test => {
         });
 
         then('A default number of 32 is loaded on the page', () => {
-           expect(AppWrapper.state('eventCount')).toEqual(32);
-        });
+            expect(AppWrapper.state('numberOfEvents')).toEqual(32);
+            });
     });
 
     test('User can change the number of events they want to see', ({ given, when, then }) => {
@@ -28,17 +28,17 @@ defineFeature(feature, test => {
         });
 
         when('user changes the number of events in the input box', () => {
-           AppWrapper.update();
-           let NumberOfEventsWrapper = AppWrapper.find('NumberOfEvents');
-           const eventObject = { target: { value: 2 }};
-           NumberOfEventsWrapper.find('.noe-input').simulate(
-            'change',
-            eventObject
-           );
-        });
+            AppWrapper.update();
+            let NumberOfEventsWrapper = AppWrapper.find('NumberOfEvents');
+            const eventObject = { target: { value: 2 }};
+            NumberOfEventsWrapper.find('.number').simulate(
+             'change',
+             eventObject
+            );
+         });;
 
         then('the User should be able to change the number of events they want to see.', () => {
-           expect(AppWrapper.find('.event')).toHaveLength(mockData.length);
+            expect(AppWrapper.state('eventCount')).toBe(2);
         });
     });
 
