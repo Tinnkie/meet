@@ -2,7 +2,6 @@ import React from 'react';
 import { loadFeature, defineFeature } from 'jest-cucumber';
 import { mount } from 'enzyme';
 import App from '../App';
-import { mockData } from '../mock-data';
 
 const feature = loadFeature('./src/features/specifyNumberOfEvents.feature');
 
