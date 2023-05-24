@@ -22,7 +22,7 @@ defineFeature(feature, test => {
     
         then('the user should see the list of upcoming events.', () => {
             AppWrapper.update();
-            expect(AppWrapper.find('.event')).toHaveLength(mockData.length); //need to figure out why this is giving me an
+            expect(AppWrapper.find('.event')).toHaveLength(mockData.length); 
         });
     });
   

@@ -48,10 +48,10 @@ describe('<App /> integration', () => {
     CitySearchWrapper.setState({ suggestions: locations });
     const suggestions = CitySearchWrapper.state('suggestions');
     const selectedIndex = Math.floor(Math.random() * (suggestions.length));
-    const selectedCity = suggestions[selectedIndex];
-    await CitySearchWrapper.instance().handleItemClicked(selectedCity);
+    const selectedLocation = suggestions[selectedIndex];
+    await CitySearchWrapper.instance().handleItemClicked(selectedLocation);
     const allEvents = await getEvents();
-    const eventsToShow = allEvents.filter(event => event.location === selectedCity);
+    const eventsToShow = allEvents.filter(event => event.location === selectedLocation);
     expect(AppWrapper.state('events')).toEqual(eventsToShow);
     AppWrapper.unmount();
   });

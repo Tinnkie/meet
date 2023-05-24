@@ -30,7 +30,7 @@ defineFeature(feature, test => {
 
         when('the user clicks on the event show details button', () => {
             AppWrapper.update();
-            AppWrapper.find('.event .details-button').at(0).simulate('click');
+            AppWrapper.find('.event .details-btn').at(0).simulate('click');
         });
 
         then('the event details should be displayed.', () => {
@@ -42,12 +42,12 @@ defineFeature(feature, test => {
         given('that a user has finished viewing a selected event', async () => {
            AppWrapper = await mount(<App />);
            AppWrapper.update();
-           AppWrapper.find('.event .details-button').at(0).simulate('click');
+           AppWrapper.find('.event .details-btn').at(0).simulate('click');
         });
 
         when('the user clicks on the details button again', () => {
           AppWrapper.update();
-          AppWrapper.find('.event .details-button').at(0).simulate('click');
+          AppWrapper.find('.event .details-btn').at(0).simulate('click');
         });
 
         then('the event details should be hidden.', () => {

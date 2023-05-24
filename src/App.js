@@ -11,7 +11,7 @@ class App extends Component {
     events: [],
     locations: [],
     selectedLocation: 'all',
-    numberOfEvents: 32,
+    eventCount: 32,
     showWelcomeScreen: undefined
   };
 
@@ -26,7 +26,7 @@ class App extends Component {
         const shownEvents = locationEvents.slice(0, this.state.eventCount);
         this.setState({
           events: shownEvents,
-          selectedCity: location,
+          selectedLocation: location,
         });
       });
     } else if (eventCount && !location) {
@@ -40,7 +40,7 @@ class App extends Component {
           eventCount: eventCount,
         });
       });
-    } else if (this.state.selectedCity === "all") {
+    } else if (this.state.selectedLocation === "all") {
       getEvents().then((events) => {
         const locationEvents = events;
         const shownEvents = locationEvents.slice(0, eventCount);
@@ -55,7 +55,7 @@ class App extends Component {
           this.state.locations === "all"
             ? events
             : events.filter(
-                (event) => this.state.selectedCity === event.location
+                (event) => this.state.selectedLocation === event.location
               );
         const shownEvents = locationEvents.slice(0, eventCount);
         this.setState({
