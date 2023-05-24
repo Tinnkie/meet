@@ -83,10 +83,14 @@ class App extends Component {
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
     const code = await searchParams.get("code");
+    const isLocal = window.location.href.startsWith("http://localhost");
     this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-    if ((code || isTokenValid) && this.mounted) {
+    console.log("out", code, isTokenValid, this.mounted);
+    if ((code || isTokenValid || isLocal) && this.mounted) {
+      console.log("in1")
     getEvents().then((events) => {
       if (this.mounted) {
+        console.log(events, extractLocations(events))
       this.setState({ 
         events: events,
         locations: extractLocations(events)
@@ -103,6 +107,7 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
+        <p id="dummy">Somehting</p>
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
         <EventList events={this.state.events} />
