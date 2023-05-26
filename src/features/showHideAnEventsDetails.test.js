@@ -1,9 +1,9 @@
 import { loadFeature, defineFeature } from 'jest-cucumber';
 import { mount } from 'enzyme';
 import React from 'react';
-import App from '../../App';
+import App from '../App';
 
-const feature = loadFeature('./src/__tests__/features/showHideAnEventsDetails.feature');
+const feature = loadFeature('./src/features/showHideAnEventsDetails.feature');
 
 defineFeature(feature, test => {
     let AppWrapper;
@@ -25,7 +25,6 @@ defineFeature(feature, test => {
     test('User can expand an event to see its details', ({ given, when, then }) => {
         given('that a user has selected an event', () => {
             AppWrapper = mount(<App />)
-
         });
 
         when('the user clicks on the event show details button', () => {
@@ -34,7 +33,7 @@ defineFeature(feature, test => {
         });
 
         then('the event details should be displayed.', () => {
-           expect(AppWrapper.find('.event .event-details')).toHaveLength(1);
+           expect(AppWrapper.find('.event .details')).toHaveLength(1);
         });
     });
 
@@ -51,7 +50,7 @@ defineFeature(feature, test => {
         });
 
         then('the event details should be hidden.', () => {
-            expect(AppWrapper.find('.event .event-details')).toHaveLength(0);
+            expect(AppWrapper.find('.event .details')).toHaveLength(0);
         });
     })
 });
