@@ -1,9 +1,9 @@
 import React from 'react';
 import { loadFeature, defineFeature } from 'jest-cucumber';
 import { mount } from 'enzyme';
-import App from '../../App';
+import App from '../App';
 
-const feature = loadFeature('./src/__tests__/features/specifyNumberOfEvents.feature');
+const feature = loadFeature('./src/features/specifyNumberOfEvents.feature');
 
 defineFeature(feature, test => {
 
@@ -17,7 +17,7 @@ defineFeature(feature, test => {
         });
 
         then('A default number of 32 is loaded on the page', () => {
-            expect(AppWrapper.state('numberOfEvents')).toEqual(32);
+            expect(AppWrapper.state('eventCount')).toEqual(32);
             });
     });
 

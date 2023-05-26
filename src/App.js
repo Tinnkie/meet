@@ -16,59 +16,34 @@ class App extends Component {
   };
 
 
-  updateEvents = (location, eventCount) => {
-    if (!eventCount) {
+  updateEvents = (location, inputNumber) => {
+    const { eventCount, selectedLocation } = this.state;
+    if (location) {
       getEvents().then((events) => {
-        const locationEvents =
-          location === "all"
-            ? events
-            : events.filter((event) => event.location === location);
-        const shownEvents = locationEvents.slice(0, this.state.eventCount);
+        const locationEvents = (location === 'all') ?
+          events :
+          events.filter((event) => event.location === location);
+        const eventsToShow = locationEvents.slice(0, eventCount);
         this.setState({
-          events: shownEvents,
-          selectedLocation: location,
-        });
-      });
-    } else if (eventCount && !location) {
-      getEvents().then((events) => {
-        const locationEvents = events.filter((event) =>
-          this.state.locations.includes(event.location)
-        );
-        const shownEvents = locationEvents.slice(0, eventCount);
-        this.setState({
-          events: shownEvents,
-          eventCount: eventCount,
-        });
-      });
-    } else if (this.state.selectedLocation === "all") {
-      getEvents().then((events) => {
-        const locationEvents = events;
-        const shownEvents = locationEvents.slice(0, eventCount);
-        this.setState({
-          events: shownEvents,
-          eventCount: eventCount,
+          events: eventsToShow,
+          selectedLocation: location
         });
       });
     } else {
       getEvents().then((events) => {
-        const locationEvents =
-          this.state.locations === "all"
-            ? events
-            : events.filter(
-                (event) => this.state.selectedLocation === event.location
-              );
-        const shownEvents = locationEvents.slice(0, eventCount);
+        const locationEvents = (selectedLocation === 'all') ? events :
+          events.filter((event) => event.location === selectedLocation);
+        const eventsToShow = locationEvents.slice(0, inputNumber);
         this.setState({
-          events: shownEvents,
-          eventCount: eventCount,
+          events: eventsToShow,
+          eventCount: inputNumber
         });
-      });
-    }
+      })
+    };
   };
 
   getData = () => {
-    const {locations, 
-  events} = this.state;
+    const {locations, events} = this.state;
     const data = locations.map((location)=>{
       const number = events.filter((event) => event.location === location).length
       const city = location.split(', ').shift()
@@ -77,27 +52,13 @@ class App extends Component {
     return data;
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.mounted = true;
-    const accessToken = localStorage.getItem('access_token');
-    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = await searchParams.get("code");
-    const isLocal = window.location.href.startsWith("http://localhost");
-    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-    console.log("out", code, isTokenValid, this.mounted);
-    if ((code || isTokenValid || isLocal) && this.mounted) {
-      console.log("in1")
     getEvents().then((events) => {
       if (this.mounted) {
-        console.log(events, extractLocations(events))
-      this.setState({ 
-        events: events,
-        locations: extractLocations(events)
-      });
-    }
+        this.setState({ events, locations: extractLocations(events) });
+      }
     });
-  }
   }
 
   componentWillUnmount(){
