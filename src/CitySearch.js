@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import { InfoAlert } from './Alert';
 
 class CitySearch extends Component {
-    state = {
-        query: '',
-        suggestions: [],
-        showSuggestions: undefined,
-        infoText: "",
-      }
+  constructor() {
+    super();
+    this.state = {
+      query: "",
+      suggestions: [],
+      showSuggestions: undefined,
+      infoText: "",
+    };
+  }
 
         handleInputChanged = (event) => {
             const value = event.target.value;
@@ -42,6 +46,7 @@ class CitySearch extends Component {
   render() {
     return (
       <div className="CitySearch">
+        <InfoAlert text={this.state.infoText} />
         <input
             type="text"
             className="city"
