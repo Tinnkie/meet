@@ -47,6 +47,20 @@ const getEvents = async (max_results = 32) => {
       NProgress.done();
       return mockData;
     }
+
+    //Access local storage when user offline
+    if (!navigator.onLine) {
+      const data = localStorage.getItem("lastEvents");
+      NProgress.done();
+      console.log("offline data: ", data);
+      return data ? JSON.parse(data).events : [];
+    }
+
+    if (!navigator.onLine) {
+      const data = localStorage.getItem("lastEvents");
+      NProgress.done();
+      return data ? JSON.parse(data).events : [];
+    }
   
   
     const token = await getAccessToken();
