@@ -5,9 +5,11 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import './nprogress.css';
-import { WarningAlert } from "./Alert";
+// import { WarningAlert } from "./Alert";
 import WelcomeScreen from './WelcomeScreen';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   state = {
@@ -62,8 +64,9 @@ class App extends Component {
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
-    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-    if ((code || isTokenValid) && this.mounted) {
+    const isLocal = window.location.href.startsWith("http://localhost") ? true : (code || isTokenValid);
+    this.setState({ showWelcomeScreen: !(isLocal) });
+    if ((isLocal) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
           this.setState({
@@ -79,28 +82,29 @@ class App extends Component {
     this.mounted = false;
   }
 
-  promptOfflineWarning = () => {
-    if (!navigator.onLine) {
-      this.setState({
-        warningText: "You are offline, so events may not be up to date",
-      });
-    }
-  };
+  notify = (msg) => toast.error(msg, {toastId: 1});
 
   render() {
     if (this.state.showWelcomeScreen === undefined) {
       return (<div className="App"></div>);
     } 
+    
+    if (!navigator.onLine) {
+      this.notify('You are currently Offline. The list of events may not be up to date');
+    }
+
     return (
       <div className='App'>
-        <WelcomeScreen
+        <ToastContainer />
+        {/* <WarningAlert text={offlineMessage} notify={this.notify} /> */}
+        {/* <WelcomeScreen
           showWelcomeScreen={this.state.showWelcomeScreen}
           getAccessToken={() => {
             getAccessToken();
           }}
-        />
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
+        /> */}
+        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} notify={this.notify} />
+        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} notify={this.notify}/>
         <h4>Events in each city</h4>
 
          <ScatterChart
@@ -118,7 +122,6 @@ class App extends Component {
         </ScatterChart>
 
         <EventList events={this.state.events} />
-        <WarningAlert text={this.state.offlineText} />
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
       </div>
     );
