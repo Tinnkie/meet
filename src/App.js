@@ -7,7 +7,7 @@ import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import './nprogress.css';
 // import { WarningAlert } from "./Alert";
 import WelcomeScreen from './WelcomeScreen';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -107,19 +107,19 @@ class App extends Component {
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} notify={this.notify}/>
         <h4>Events in each city</h4>
 
+        <ResponsiveContainer height={400} >
          <ScatterChart
-          width={400}
-          height={400}
           margin={{
             top: 20, right: 20, bottom: 20, left: 20,
           }}
         >
           <CartesianGrid />
           <XAxis dataKey="city" type="category" name="city" />
-          <YAxis dataKey="y" type="number" name="number of events" allowDecimals={false} />
+          <YAxis dataKey="number" type="number" name="number of events" allowDecimals={false} />
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           <Scatter data={this.getData()} fill="#8884d8" />
         </ScatterChart>
+        </ResponsiveContainer>
 
         <EventList events={this.state.events} />
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
