@@ -10,6 +10,7 @@ import WelcomeScreen from './WelcomeScreen';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import EventGenre from "./EventGenre";
 
 class App extends Component {
   state = {
@@ -95,6 +96,7 @@ class App extends Component {
 
     return (
       <div className='App'>
+        <h1>MEET APP</h1>
         <ToastContainer />
         {/* <WarningAlert text={offlineMessage} notify={this.notify} /> */}
         {/* <WelcomeScreen
@@ -105,6 +107,8 @@ class App extends Component {
         /> */}
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} notify={this.notify} />
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents} notify={this.notify}/>
+        <div className="data-vis-wrapper">
+        <EventGenre events={this.state.events} />
         <h4>Events in each city</h4>
 
         <ResponsiveContainer height={400} >
@@ -120,14 +124,12 @@ class App extends Component {
           <Scatter data={this.getData()} fill="#8884d8" />
         </ScatterChart>
         </ResponsiveContainer>
-
+        </div>
         <EventList events={this.state.events} />
         <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }} />
       </div>
     );
   }
 }
-
-
 
 export default App;
