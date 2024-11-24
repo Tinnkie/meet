@@ -15,8 +15,8 @@ developers
 <div class="google-icon-wrapper">
 <img
 class="google-icon"
-src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Log
-o.svg"
+
+src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
 alt="Google sign-in"
 />
 </div>
