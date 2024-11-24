@@ -1,3 +1,4 @@
+/* Ensure the WelcomeScreen takes full height and is centered */
 .WelcomeScreen {
     position: fixed;
     width: 100%;
@@ -7,12 +8,14 @@
     background: white;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Vertically center content */
+    align-items: center; /* Horizontally center content */
     text-align: center;
     padding: 20px;
+    box-sizing: border-box; /* Prevents padding from affecting width/height */
   }
   
+  /* Larger font for h1 and appropriate margins */
   h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
@@ -23,10 +26,12 @@
     margin-bottom: 20px;
   }
   
+  /* Button container */
   .button_cont {
     margin: 20px 0;
   }
   
+  /* Google Button Styling */
   .google-btn {
     display: flex;
     align-items: center;
@@ -49,6 +54,7 @@
     background: #1669f2;
   }
   
+  /* Google icon and wrapper */
   .google-icon-wrapper {
     width: 30px;
     height: 30px;
@@ -64,6 +70,7 @@
     height: 18px;
   }
   
+  /* Button text styling */
   .btn-text {
     color: #fff;
     font-size: 14px;
@@ -73,6 +80,7 @@
     text-align: center;
   }
   
+  /* Privacy policy link */
   .privacy-policy-link {
     font-size: 0.875rem;
     color: #4285f4;
