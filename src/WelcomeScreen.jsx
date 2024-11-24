@@ -8,7 +8,7 @@ function WelcomeScreen(props) {
       <h4>
         Log in to see upcoming events around the world for full-stack developers
       </h4>
-      <div className="button_cont" align="center">
+      <div className="button-cont">
         <div className="google-btn">
           <div className="google-icon-wrapper">
             <img
@@ -19,7 +19,6 @@ function WelcomeScreen(props) {
           </div>
           <button
             onClick={() => { props.getAccessToken(); }}
-            rel="nofollow noopener"
             className="btn-text"
           >
             <b>Sign in with Google</b>
@@ -28,8 +27,8 @@ function WelcomeScreen(props) {
       </div>
       <a
         href="https://tinnkie.github.io/meet/privacy.html"
-        rel="nofollow noopener"
         className="privacy-policy-link"
+        rel="nofollow noopener"
       >
         Privacy policy
       </a>
